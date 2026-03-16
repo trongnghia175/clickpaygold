@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kawaii Clicker Reward</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>✨ Kawaii Clicker ✨</h1>
+            <div class="score-board">
+                <p>Số Click: <span id="click-count">0</span> 🐾</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="click-area">
+                <button id="click-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4406/4406319.png" alt="Cute Icon">
+                </button>
+            </div>
+
+            <div class="reward-section">
+                <h3>🎁 Đổi Thưởng</h3>
+                <p class="note">(Chiết khấu 10k mỗi lần rút)</p>
+                <div class="reward-options">
+                    <button onclick="redeem(1000, '100k VNĐ')">1.000 Click = 100k</button>
+                    <button onclick="redeem(2000, '200k VNĐ')">2.000 Click = 200k</button>
+                </div>
+            </div>
+        </main>
+
+        <aside class="leaderboard">
+            <h3>🏆 Bảng Xếp Hạng</h3>
+            <ul id="rank-list">
+                <li>Top 1: Player AAA - 5000</li>
+                <li>Top 2: Player BBB - 3500</li>
+            </ul>
+        </aside>
+    </div>
+
+    <div id="modal-overlay" class="hidden">
+        <div class="modal">
+            <h2>🎉 ĐỔI THƯỞNG THÀNH CÔNG!</h2>
+            <div id="receipt-content">
+                </div>
+            <p class="footer-note">📸 Vui lòng chụp màn hình và IB AD để nhận thưởng!</p>
+            <button onclick="closeModal()">Đóng</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -91,6 +91,7 @@ body {
     padding: 10px;
     border-radius: 10px;
 }
+
 .receipt-box, .error-box {
     text-align: left;
     background: #fff9fb;
@@ -121,36 +122,7 @@ body {
 #modal-overlay:not(.hidden) .modal {
     animation: fadeIn 0.3s ease;
 }
-.receipt-box, .error-box {
-    text-align: left;
-    background: #fff9fb;
-    padding: 15px;
-    border-radius: 15px;
-    margin: 15px 0;
-    line-height: 1.6;
-}
 
-.error-box {
-    text-align: center;
-    background: #fff0f0;
-}
-
-.modal h2 {
-    margin-top: 0;
-    font-size: 1.4rem;
-}
-
-/* Hiệu ứng rung nhẹ khi không đủ tiền */
-@keyframes shake {
-    0% { transform: translate(-50%, -50%) translateX(0); }
-    25% { transform: translate(-50%, -50%) translateX(-5px); }
-    50% { transform: translate(-50%, -50%) translateX(5px); }
-    100% { transform: translate(-50%, -50%) translateX(0); }
-}
-
-#modal-overlay:not(.hidden) .modal {
-    animation: fadeIn 0.3s ease;
-}
 /* Chặn zoom và các hiệu ứng chọn văn bản khi click nhanh */
 #click-btn {
     touch-action: manipulation; /* Ngăn double-tap to zoom */
@@ -161,23 +133,4 @@ body {
 body {
     /* Thêm thuộc tính này để trải nghiệm mượt hơn trên mobile */
     touch-action: pan-y; 
-}
-.user-info {
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-    color: var(--text);
-}
-
-.user-info span {
-    color: #ff70a6;
-    font-weight: bold;
-}
-
-.user-info button {
-    background: var(--accent);
-    border: none;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    margin-left: 5px;
 }

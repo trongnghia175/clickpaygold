@@ -108,3 +108,54 @@ function showModal(content, isSuccess) {
 function closeModal() {
     modalOverlay.classList.add('hidden');
 }
+// Khởi tạo dữ liệu
+let clicks = parseInt(localStorage.getItem('savedClicks')) || 0;
+// Lấy tên đã lưu hoặc đặt mặc định
+let username = localStorage.getItem('username') || "Người chơi"; 
+let lastClickTime = 0;
+
+const clickCountDisplay = document.getElementById('click-count');
+const usernameDisplay = document.getElementById('display-username');
+
+// Hiển thị dữ liệu khi load trang
+clickCountDisplay.innerText = clicks.toLocaleString();
+usernameDisplay.innerText = username;
+
+// Hàm đổi tên người dùng
+function changeName() {
+    const newName = prompt("Nhập tên mới của bạn:", username);
+    if (newName && newName.trim() !== "") {
+        username = newName.trim();
+        localStorage.setItem('username', username); // Lưu vào máy
+        usernameDisplay.innerText = username;
+    }
+}
+
+// Cập nhật hàm redeem để hiện tên trong biên lai (Tùy chọn)
+function redeem(requiredClicks, rewardName) {
+    const valueMap = { 1000: 100, 2000: 200 };
+    const value = valueMap[requiredClicks] || 0;
+
+    if (clicks < requiredClicks) {
+        showErrorModal();
+        return;
+    }
+
+    clicks -= requiredClicks;
+    localStorage.setItem('savedClicks', clicks);
+    clickCountDisplay.innerText = clicks.toLocaleString();
+
+    const finalAmount = value - 10;
+    
+    const successHTML = `
+        <div class="receipt-box">
+            <p style="color: #2a9d8f; font-weight: bold; font-size: 1.2rem;">✨ GIAO DỊCH THÀNH CÔNG ✨</p>
+            <hr style="border: 1px dashed #ddd;">
+            <p><strong>Người nhận:</strong> ${username}</p> <p><strong>Mã số:</strong> <span style="color: #e76f51;">${generateRandomCode()}</span></p>
+            <p><strong>Phần thưởng:</strong> ${rewardName}</p>
+            <p><strong>Thực nhận:</strong> ${finalAmount}k (Đã trừ 10k phí)</p>
+            <p><strong>Thời gian:</strong> ${getCurrentTime()}</p>
+        </div>
+    `;
+    showModal(successHTML, true);
+}

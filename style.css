@@ -162,3 +162,22 @@ body {
     /* Thêm thuộc tính này để trải nghiệm mượt hơn trên mobile */
     touch-action: pan-y; 
 }
+.user-info {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+.user-info span {
+    color: #ff70a6;
+    font-weight: bold;
+}
+
+.user-info button {
+    background: var(--accent);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    margin-left: 5px;
+}

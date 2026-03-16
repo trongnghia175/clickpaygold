@@ -151,3 +151,14 @@ body {
 #modal-overlay:not(.hidden) .modal {
     animation: fadeIn 0.3s ease;
 }
+/* Chặn zoom và các hiệu ứng chọn văn bản khi click nhanh */
+#click-btn {
+    touch-action: manipulation; /* Ngăn double-tap to zoom */
+    -webkit-tap-highlight-color: transparent; /* Xóa khung màu xanh khi chạm trên mobile */
+    user-select: none; /* Ngăn việc bôi đen hình ảnh/chữ khi click quá nhanh */
+}
+
+body {
+    /* Thêm thuộc tính này để trải nghiệm mượt hơn trên mobile */
+    touch-action: pan-y; 
+}

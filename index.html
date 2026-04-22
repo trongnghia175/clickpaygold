@@ -2,62 +2,141 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[DTN FILE]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS tích hợp luôn vào đây để Bo dễ copy */
+        :root {
+            --gold: #d4af37;
+            --dark-bg: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
 
-    <title>Click Pay Gold</title>
-    <link rel="stylesheet" href="style.css">
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .header h1 {
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Layout Masonry giúp ảnh không bị cắt */
+        .gallery {
+            columns: 4 250px; /* Tự động chia cột theo kích thước màn hình */
+            column-gap: 20px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .img-card {
+            position: relative;
+            margin-bottom: 20px;
+            break-inside: avoid;
+            background: var(--glass);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .img-card img {
+            width: 100%;
+            height: auto; /* Đảm bảo hiện full ảnh */
+            display: block;
+            transition: 0.5s;
+        }
+
+        .img-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Nút tải về xuất hiện khi hover */
+        .actions {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .img-card:hover .actions {
+            opacity: 1;
+        }
+
+        .btn-download {
+            background: var(--gold);
+            color: black;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-download:hover {
+            transform: scale(1.1);
+            background: #fff;
+        }
+    </style>
 </head>
 <body>
-    <div class="game-container">
-        <header>
-            <h1>CLICK PAY GOLD</h1>
-            <div class="user-info">
-   
-</div>
 
-            <div class="score-board">
-                <p>Số Click: <span id="click-count">0</span> 🐾</p>
-            </div>
-        </header>
-
-        <main>
-            <div class="click-area">
-                <button id="click-btn">
-                    <img src="click.png" alt="Cute Icon">
-                </button>
-            </div>
-
-            <div class="reward-section">
-                <h3>🎁 Đổi Thưởng 🎁</h3>
-                <p class="note">(Chiết khấu 1k mỗi lần rút)</p>
-                <div class="reward-options">
-                    <button onclick="redeem(1000000, '2k VNĐ')">1.000.000 Click = 2k</button><br>
-                    <button onclick="redeem(20000000, '20k VNĐ')">10.000.000 Click = 20k</button><br>
-                    <button onclick="redeem(100000000, '100k VNĐ')">100.000.000 Click = 200k</button>
-                    
-                 
-                </div>
-            </div>
-        </main>
-<div class="reward-section">
-        <aside class="leaderboard">
-            <h3>🏆 Bảng Xếp Hạng</h3>
-            
-                <p>(Sẽ sớm được cập nhật)</li>
-            
-        </aside>
+    <div class="header">
+        <h1>DTN FILE</h1>
+        <p>Gửi - Share Nhanh Chóng - Tiện Lợi  <br>(Ảnh - File - Tài Nguyên - ...)</p>
     </div>
 
-    <div id="modal-overlay" class="hidden">
-        <div class="modal">
-            <h2>🎉 ĐỔI THƯỞNG THÀNH CÔNG!</h2>
-            <div id="receipt-content">
-                </div>
-            <p class="footer-note">📸 Khi đã đổi thưởng thành công, vui lòng chụp màn hình và IB AD để nhận thưởng!</p>
-            <button onclick="closeModal()">Được Rồi</button>
+    <div class="gallery" id="imageGallery">
         </div>
-    </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Danh sách ảnh Bo muốn đưa lên (thay bằng link ảnh thật của bạn)
+        const myImages = [
+    'img/1.jpeg', 'img/2.jpeg', 'img/3.jpeg', 'img/4.jpeg', 'img/5.jpeg',
+    'img/6.jpeg', 'img/7.jpeg', 'img/8.jpeg', 'img/9.jpeg', 'img/10.jpeg',
+    'img/11.jpeg', 'img/12.jpeg', 'img/13.jpeg', 'img/14.jpeg', 'img/15.jpeg',
+    'img/16.jpeg', 'img/17.jpeg', 'img/18.jpeg', 'img/19.jpeg', 'img/20.jpeg',
+    'img/21.jpeg', 'img/22.jpeg', 'img/23.jpeg'
+];
+
+
+        const gallery = document.getElementById('imageGallery');
+
+        myImages.forEach((url, index) => {
+            const card = document.createElement('div');
+            card.className = 'img-card';
+            card.innerHTML = `
+                <img src="${url}" alt="Photo ${index + 1}">
+                <div class="actions">
+                    <a href="${url}" download="Anh_${index + 1}.jpg" target="_blank" class="btn-download">
+                        <i class="fas fa-download"></i> TẢI VỀ
+                    </a>
+                </div>
+            `;
+            gallery.appendChild(card);
+        });
+    </script>
 </body>
 </html>
